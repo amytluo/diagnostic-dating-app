@@ -3,7 +3,16 @@ import { StyleSheet, Text, View, Dimensions, Image, Animated, PanResponder } fro
 
 const SCREEN_HEIGHT = Dimensions.get('window').height
 const SCREEN_WIDTH = Dimensions.get('window').width
-import Icon from 'react-native-vector-icons/Ionicons'
+
+
+const styles = StyleSheet.create({
+  title: {
+    fontFamily: 'monospace',
+    color: 'darkslategrey',
+    fontWeight: 'bold',
+    fontSize: 30,
+  },
+}); 
 
 const Users = [
   { id: "1", uri: require('./assets/1.jpg') },
@@ -75,6 +84,7 @@ export default class App extends React.Component {
               this.position.setValue({ x: 0, y: 0 })
             })
           })
+          // insert backend here
         }
         else if (gestureState.dx < -120) {
           Animated.spring(this.position, {
@@ -104,13 +114,12 @@ export default class App extends React.Component {
         return null
       }
       else if (i == this.state.currentIndex) {
-
         return (
           <Animated.View
             {...this.PanResponder.panHandlers}
             key={item.id} style={[this.rotateAndTranslate, { height: SCREEN_HEIGHT - 120, width: SCREEN_WIDTH, padding: 10, position: 'absolute' }]}>
             <Animated.View style={{ opacity: this.likeOpacity, transform: [{ rotate: '-30deg' }], position: 'absolute', top: 50, left: 40, zIndex: 1000 }}>
-              <Text style={{ borderWidth: 1, borderColor: 'green', color: 'green', fontSize: 32, fontWeight: '800', padding: 10 }}>LIKE</Text>
+              <Text style={{ borderWidth: 1, borderColor: 'green', color: 'green', fontSize: 32, fontWeight: '800', padding: 10 }}>YES</Text>
 
             </Animated.View>
 
@@ -136,7 +145,7 @@ export default class App extends React.Component {
               height: SCREEN_HEIGHT - 120, width: SCREEN_WIDTH, padding: 10, position: 'absolute'
             }]}>
             <Animated.View style={{ opacity: 0, transform: [{ rotate: '-30deg' }], position: 'absolute', top: 50, left: 40, zIndex: 1000 }}>
-              <Text style={{ borderWidth: 1, borderColor: 'green', color: 'green', fontSize: 32, fontWeight: '800', padding: 10 }}>LIKE</Text>
+              <Text style={{ borderWidth: 1, borderColor: 'green', color: 'green', fontSize: 32, fontWeight: '800', padding: 10 }}>YES</Text>
 
             </Animated.View>
 
@@ -159,11 +168,16 @@ export default class App extends React.Component {
     return (
       <View style={{ flex: 1 }}>
         <View style={{ height: 60 }}>
+        
+        </View>
 
-        </View>
-        <View style={{ flex: 1 }}>
-          {this.renderUsers()}
-        </View>
+          <View style={{ flex: 1, justifyContent: "flex-start", alignItems: "center" }}>
+            <Text style={styles.title}>DIAGNOSTIC DATING</Text>
+          </View>
+
+          <View style={{ flex: 10 }}>
+            {this.renderUsers()}
+          </View>
         <View style={{ height: 60 }}>
 
         </View>
