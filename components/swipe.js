@@ -24,50 +24,54 @@ const styles = StyleSheet.create({
 }); 
 
 const allPictures = [
-    { id: 0, uri: require('../assets/Fever.png') },
-    { id: 1, uri: require('../assets/Sore_Throat.png') },
-    { id: 2, uri: require('../assets/Muscle_Pain.png') },
-    { id: 3, uri: require('../assets/Loss_of_apatite.png') },
-    { id: 4, uri: require('../assets/Weakness.png') },
-    { id: 5, uri: require('../assets/Nausea.png') },
-    { id: 6, uri: require('../assets/Diarrhea.png') },
-    { id: 7, uri: require('../assets/Vomiting.png') },
-    { id: 8, uri: require('../assets/Chest_Pain.png') },
-    { id: 9, uri: require('../assets/Shortness_of_breath.png') },
-    { id: 10, uri: require('../assets/Uneven_Heartbeat.png') },
-    { id: 11, uri: require('../assets/Bloody_Stool.png') },
-    { id: 12, uri: require('../assets/Vomiting_Blood.png') },
-    { id: 13, uri: require('../assets/Stomach_Pain.png') },
-    { id: 14, uri: require('../assets/Headache.png') },
-    { id: 15, uri: require('../assets/Rash.png') },
-    { id: 16, uri: require('../assets/Sneezing.png') },
-    { id: 17, uri: require('../assets/Nasal_Congestion.png') },
-    { id: 18, uri: require('../assets/Itchy_Eyes.png') },
-    { id: 19, uri: require('../assets/Pneumonia.png') },
-    { id: 20, uri: require('../assets/Dry_Cough.png') },
-    { id: 21, uri: require('../assets/Cough_up_Blood.png') },
+    { id: 1, name: "Fever", uri: require('../assets/Fever.png') },
+    { id: 2, name: "Sore Throat",uri: require('../assets/Sore_Throat.png') },
+    { id: 3, name: "Muscle Pain",uri: require('../assets/Muscle_Pain.png') },
+    { id: 4, name: "Loss of Appetite",uri: require('../assets/Loss_of_apatite.png') },
+    { id: 5, name: "Weakness", uri: require('../assets/Weakness.png') },
+    { id: 6, name: "Nausea", uri: require('../assets/Nausea.png') },
+    { id: 7, name: "Diarrhea", uri: require('../assets/Diarrhea.png') },
+    { id: 8, name: "Vomiting", uri: require('../assets/Vomiting.png') },
+    { id: 9, name: "Chest Pain", uri: require('../assets/Chest_Pain.png') },
+    { id: 10, name: "Shortness of Breath", uri: require('../assets/Shortness_of_breath.png') },
+    { id: 11, name: "Uneven Heatbeat", uri: require('../assets/Uneven_Heartbeat.png') },
+    { id: 12, name: "Bloody Stool", uri: require('../assets/Bloody_Stool.png') },
+    { id: 13, name: "Vomiting Blood", uri: require('../assets/Vomiting_Blood.png') },
+    { id: 14, name: "Stomach Pain", uri: require('../assets/Stomach_Pain.png') },
+    { id: 15, name: "Headache", uri: require('../assets/Headache.png') },
+    { id: 16, name: "Rash", uri: require('../assets/Rash.png') },
+    { id: 17, name: "Sneezing", uri: require('../assets/Sneezing.png') },
+    { id: 18, name: "Nasal Congestion", uri: require('../assets/Nasal_Congestion.png') },
+    { id: 19, name: "Itchy Eyes", uri: require('../assets/Itchy_Eyes.png') },
+    { id: 20, name: "Pneumonia", uri: require('../assets/Pneumonia.png') },
+    { id: 21, name: "Dry Cough", uri: require('../assets/Dry_Cough.png') },
+    { id: 22, name: "Cough up Blood", uri: require('../assets/Cough_up_Blood.png') },
   ]
 
-const Users = [
-  
-]
+var Users = []
 
+var updateUsers = () => {
+  Users = []
+  let indexCurrent = Math.floor(Math.random() * 10);
 
-var indexCurrent = Math.floor(Math.random() * 10);
-for (var i = 0; i < 11; i++) {
-    if (indexCurrent == 22) {
-      indexCurent = 0;
+    for (let i = 0; i < 11; i++) {
+    if (indexCurrent == 23) {
+      indexCurent = 1;
     }
     Users.push(allPictures[indexCurrent]);
     indexCurrent++;
-}
+}}
+
+updateUsers()
+
+
 
 
 export default class App extends React.Component {
 
-  constructor() {
-    super()
-
+  constructor(props) {
+    super(props)
+    updateUsers()
     this.position = new Animated.ValueXY()
     this.state = {
       currentIndex: 0
@@ -110,7 +114,7 @@ export default class App extends React.Component {
     })
 
   }
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.PanResponder = PanResponder.create({
 
       onStartShouldSetPanResponder: (evt, gestureState) => true,
@@ -128,10 +132,11 @@ export default class App extends React.Component {
               this.position.setValue({ x: 0, y: 0 })
             })
           })
-          if (currentIndex == 10) {
+          fetch("http://diagnostic-dating.herokuapp.com/api/user/" + global.sess_id + "/update_scores/" + Users[this.state.currentIndex].id, {method : 'PUT'}).then()
+          if (this.state.currentIndex == 10) {
             this.props.navigation.navigate('Match')
           }
-          // insert backend here
+          //backend here
         }
         else if (gestureState.dx < -120) {
           Animated.spring(this.position, {
@@ -141,7 +146,7 @@ export default class App extends React.Component {
               this.position.setValue({ x: 0, y: 0 })
             })
           })
-          if (currentIndex == 10) {
+          if (this.state.currentIndex == 10) {
             this.props.navigation.navigate('Match')
           }
         }
@@ -164,7 +169,7 @@ export default class App extends React.Component {
         return (
           <Animated.View
             {...this.PanResponder.panHandlers}
-            key={item.id} style={[this.rotateAndTranslate, { height: SCREEN_HEIGHT - 120, width: SCREEN_WIDTH, padding: 10, position: 'absolute' }]}>
+            key={item.id} style={[this.rotateAndTranslate, { height: SCREEN_HEIGHT - 200, width: SCREEN_WIDTH, padding: 10, position: 'absolute'}]}>
             <Animated.View style={{ opacity: this.likeOpacity, transform: [{ rotate: '-30deg' }], position: 'absolute', top: 50, left: 40, zIndex: 1000 }}>
               <Text style={{ borderWidth: 1, borderColor: 'green', color: 'green', fontSize: 32, fontWeight: '800', padding: 10 }}>YES</Text>
 
@@ -176,11 +181,11 @@ export default class App extends React.Component {
             </Animated.View>
 
             <Image
-              style={{ flex: 4, height: null, width: null, resizeMode: 'cover', borderRadius: 20 }}
+              style={{ flex: 9, height: null, width: null, resizeMode: 'cover' }}
               source={item.uri} />
-            <View style={{ flex: 1, justifyContent: "flex-start", alignItems: "center" }}>
+            <View style={{ flex: 1, justifyContent: "flex-start", alignItems: "center" , opacity: 1, backgroundColor: 'white'}}>
 
-            <Text style={styles.illness}>*insert name of illness here*</Text>
+            <Text style={styles.illness}> {item.name}</Text>
           </View>
           </Animated.View>
         )
@@ -192,7 +197,7 @@ export default class App extends React.Component {
             key={item.id} style={[{
               opacity: this.nextCardOpacity,
               transform: [{ scale: this.nextCardScale }],
-              height: SCREEN_HEIGHT - 120, width: SCREEN_WIDTH, padding: 10, position: 'absolute'
+              height: SCREEN_HEIGHT - 200, width: SCREEN_WIDTH, padding: 10, position: 'absolute'
             }]}>
             <Animated.View style={{ opacity: 0, transform: [{ rotate: '-30deg' }], position: 'absolute', top: 50, left: 40, zIndex: 1000 }}>
               <Text style={{ borderWidth: 1, borderColor: 'green', color: 'green', fontSize: 32, fontWeight: '800', padding: 10 }}>YES</Text>
@@ -205,10 +210,10 @@ export default class App extends React.Component {
             </Animated.View>
 
             <Image
-              style={{ flex: 4, height: null, width: null, resizeMode: 'cover', borderRadius: 20 }}
+              style={{ flex: 9, height: null, width: null, resizeMode: 'cover'}}
               source={item.uri} />
-            <View style={{ flex: 1, justifyContent: "flex-start", alignItems: "center" }}>
-              <Text style={styles.illness}>*insert name of illness here*</Text>
+            <View style={{ flex: 1, justifyContent: "flex-start", alignItems: "center", opacity: 1, backgroundColor: 'white' }}>
+              <Text style={styles.illness}> {item.name} </Text>
             </View>
           </Animated.View>
         )
@@ -234,7 +239,7 @@ export default class App extends React.Component {
         
         </View>
           <View style={{ flex: 1, justifyContent: "flex-start", alignItems: "center" }}>
-            <Text style={styles.title}>Swipe right if you are experiencing the symptom, swipe left otherwise</Text>
+            <Text style={styles.title}>|{global.sess_id}| Swipe right if you are experiencing the symptom, swipe left otherwise</Text>
           </View>
 
           <View style={{ flex: 10 }}>
