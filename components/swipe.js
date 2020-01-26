@@ -24,28 +24,28 @@ const styles = StyleSheet.create({
 }); 
 
 const allPictures = [
-    { id: 0, uri: require('./assets/Fever.png') },
-    { id: 1, uri: require('./assets/Sore Throat.png') },
-    { id: 2, uri: require('./assets/Muscle Pain.png') },
-    { id: 3, uri: require('./assets/Loss of apatite.png') },
-    { id: 4, uri: require('./assets/Weakness.png') },
-    { id: 5, uri: require('./assets/Nausea.png') },
-    { id: 6, uri: require('./assets/Diarrhea.png') },
-    { id: 7, uri: require('./assets/Vomiting.png') },
-    { id: 8, uri: require('./assets/Chest Pain.png') },
-    { id: 9, uri: require('./assets/Shortness of breath.png') },
-    { id: 10, uri: require('./assets/Uneven Heartbeat.png') },
-    { id: 11, uri: require('./assets/Bloody Stool.png') },
-    { id: 12, uri: require('./assets/Vomiting Blood.png') },
-    { id: 13, uri: require('./assets/Stomach Pain.png') },
-    { id: 14, uri: require('./assets/Headache.png') },
-    { id: 15, uri: require('./assets/Rash.png') },
-    { id: 16, uri: require('./assets/Sneezing.png') },
-    { id: 17, uri: require('./assets/Nasal Congestion.png') },
-    { id: 18, uri: require('./assets/Itchy eyes.png') },
-    { id: 19, uri: require('./assets/Pneumonia.png') },
-    { id: 20, uri: require('./assets/Dry Cough.png') },
-    { id: 21, uri: require('./assets/Cough up blood.png') },
+    { id: 0, uri: require('../assets/Fever.png') },
+    { id: 1, uri: require('../assets/Sore Throat.png') },
+    { id: 2, uri: require('../assets/Muscle Pain.png') },
+    { id: 3, uri: require('../assets/Loss of apatite.png') },
+    { id: 4, uri: require('../assets/Weakness.png') },
+    { id: 5, uri: require('../assets/Nausea.png') },
+    { id: 6, uri: require('../assets/Diarrhea.png') },
+    { id: 7, uri: require('../assets/Vomiting.png') },
+    { id: 8, uri: require('../assets/Chest Pain.png') },
+    { id: 9, uri: require('../assets/Shortness of breath.png') },
+    { id: 10, uri: require('../assets/Uneven Heartbeat.png') },
+    { id: 11, uri: require('../assets/Bloody Stool.png') },
+    { id: 12, uri: require('../assets/Vomiting Blood.png') },
+    { id: 13, uri: require('../assets/Stomach Pain.png') },
+    { id: 14, uri: require('../assets/Headache.png') },
+    { id: 15, uri: require('../assets/Rash.png') },
+    { id: 16, uri: require('../assets/Sneezing.png') },
+    { id: 17, uri: require('../assets/Nasal Congestion.png') },
+    { id: 18, uri: require('../assets/Itchy Eyes.png') },
+    { id: 19, uri: require('../assets/Pneumonia.png') },
+    { id: 20, uri: require('../assets/Dry Cough.png') },
+    { id: 21, uri: require('../assets/Cough up Blood.png') },
   ]
 
 const Users = [
@@ -104,7 +104,7 @@ export default class App extends React.Component {
     })
 
   }
-  UNSAFE_componentWillMount() {
+  componentWillMount() {
     this.PanResponder = PanResponder.create({
 
       onStartShouldSetPanResponder: (evt, gestureState) => true,
