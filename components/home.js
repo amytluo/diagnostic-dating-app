@@ -1,6 +1,23 @@
 import React, { Component } from 'react';
-import { Button, View } from 'react-native';
+import { Button, View, ImageBackground, StyleSheet} from 'react-native';
 
+const styles = StyleSheet.create({
+    title: {
+      fontFamily: 'monospace',
+      color: 'darkslategrey',
+      fontWeight: 'bold',
+      fontSize: 15,
+    },
+    illness: {
+      fontFamily: 'monospace',
+      color: 'darkslategrey',
+      fontSize: 20,
+    },
+    background: {
+      width: '100%',
+      height: '100%'
+    },
+  }); 
 
 class Home extends Component {
 
@@ -8,12 +25,6 @@ class Home extends Component {
         const { navigate } = this.props.navigation
         return (
             <View>
-                <ImageBackground
-                    source={require('./assets/background.jpg')}
-                    style={styles.background}
-                >
-                </ImageBackground>
-
                 <Button title="Start Diagnosis" onPress={() => {
                     let sess_id = "";
                     for (let i = 0; i < 10; i++) {
@@ -24,6 +35,13 @@ class Home extends Component {
                     }*/
                     this.props.navigation.navigate('Swipe')
                 }}></Button>
+                <ImageBackground
+                    source={require('../assets/background.jpg')}
+                    style={styles.background}
+                >
+                </ImageBackground>
+
+                
             </View>
         );
     }
