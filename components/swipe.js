@@ -49,13 +49,9 @@ const allPictures = [
   ]
 
 const Users = [
-    // random generate number
-    // increment for loop
-    // check for 21
-    
 ]
 
-var indexCurrent = Math.floor(Math.random() * 10)];
+var indexCurrent = Math.floor(Math.random() * 10);
 for (var i = 0; i < 11; i++) {
     Users.push(allPictures[indexCurrent]);
     indexCurrent++;
