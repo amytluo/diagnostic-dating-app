@@ -2,14 +2,14 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import home from './components/home';
 import swipe from './components/swipe.js';
-//import match from './components/match.js';
+import match from './components/match.js';
 
 
 const MainNavigator = createStackNavigator(
   {
     Home: { screen: home },
     Swipe: { screen: swipe },
-    //Match: { screen: match }
+    Match: { screen: match }
   },
   {
     initialRouteName: 'Home',
