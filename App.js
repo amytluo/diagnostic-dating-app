@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions, Image, Animated, PanResponder } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, Image, Animated, PanResponder, TouchableHighlight, ImageBackground } from 'react-native';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height
 const SCREEN_WIDTH = Dimensions.get('window').width
@@ -12,12 +12,23 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 30,
   },
+  illness: {
+    fontFamily: 'monospace',
+    color: 'darkslategrey',
+    fontSize: 20,
+  },
+  background: {
+    width: '100%',
+    height: '100%'
+  },
 }); 
+
 
 const Users = [
   { id: "1", uri: require('./assets/1.jpg') },
   { id: "2", uri: require('./assets/2.jpg') },
 ]
+
 
 export default class App extends React.Component {
 
@@ -106,10 +117,7 @@ export default class App extends React.Component {
   }
 
   renderUsers = () => {
-
     return Users.map((item, i) => {
-
-
       if (i < this.state.currentIndex) {
         return null
       }
@@ -129,9 +137,12 @@ export default class App extends React.Component {
             </Animated.View>
 
             <Image
-              style={{ flex: 1, height: null, width: null, resizeMode: 'cover', borderRadius: 20 }}
+              style={{ flex: 4, height: null, width: null, resizeMode: 'cover', borderRadius: 20 }}
               source={item.uri} />
+            <View style={{ flex: 1, justifyContent: "flex-start", alignItems: "center" }}>
 
+            <Text style={styles.illness}>*insert name of illness here*</Text>
+          </View>
           </Animated.View>
         )
       }
@@ -155,9 +166,11 @@ export default class App extends React.Component {
             </Animated.View>
 
             <Image
-              style={{ flex: 1, height: null, width: null, resizeMode: 'cover', borderRadius: 20 }}
+              style={{ flex: 4, height: null, width: null, resizeMode: 'cover', borderRadius: 20 }}
               source={item.uri} />
-
+            <View style={{ flex: 1, justifyContent: "flex-start", alignItems: "center" }}>
+              <Text style={styles.illness}>*insert name of illness here*</Text>
+            </View>
           </Animated.View>
         )
       }
@@ -165,12 +178,29 @@ export default class App extends React.Component {
   }
 
   render() {
+    /*
+    const shadowBottomBarStyle = {
+      shadowColour: 'black',
+      shadowOffset: { height: -1 },
+      shadowRadius: 2,
+      shadowOpacity: 0.8
+    }
+    */
+
     return (
+
       <View style={{ flex: 1 }}>
-        <View style={{ height: 60 }}>
+        <View style={{ height: 0 }}>
         
         </View>
-
+        <ImageBackground
+        source={require('./assets/background.jpg')}
+        style = {styles.background}
+        >
+      </ImageBackground>
+      <View style={{ height: 60 }}>
+        
+        </View>
           <View style={{ flex: 1, justifyContent: "flex-start", alignItems: "center" }}>
             <Text style={styles.title}>DIAGNOSTIC DATING</Text>
           </View>
